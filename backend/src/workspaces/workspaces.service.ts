@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateWorkspaceDto } from './dto/create-workspace.dto';
-import { WorkspaceRole } from '@prisma/client';
 
 @Injectable()
 export class WorkspacesService {
@@ -11,23 +9,47 @@ export class WorkspacesService {
 
   async create(
     userId: string,
-    dto: CreateWorkspaceDto,
+    data: {
+      name: string;
+      description?: string;
+    },
   ) {
-    const slug = dto.name
-      .toLowerCase()
-      .replace(/\s+/g, '-');
 
-    const workspace = await this.prisma.workspace.create({
+    const slug =
+      data.name
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+
+    return this.prisma.workspace.create({
       data: {
-        name: dto.name,
+        name: data.name,
         slug,
-        description: dto.description,
+        description: data.description,
+
         ownerId: userId,
 
         memberships: {
           create: {
             userId,
-            role: WorkspaceRole.OWNER,
+            role: 'OWNER',
+          },
+        },
+      },
+
+      include: {
+        memberships: true,
+      },
+    });
+  }
+
+
+  async findAll(userId: string) {
+
+    return this.prisma.workspace.findMany({
+      where: {
+        memberships: {
+          some: {
+            userId,
           },
         },
       },
@@ -37,19 +59,5 @@ export class WorkspacesService {
       },
     });
 
-    return workspace;
-  }
-
-
-  async findUserWorkspaces(userId: string) {
-    return this.prisma.workspace.findMany({
-      where: {
-        memberships: {
-          some: {
-            userId,
-          },
-        },
-      },
-    });
   }
 }

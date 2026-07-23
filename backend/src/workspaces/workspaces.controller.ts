@@ -26,10 +26,12 @@ export class WorkspacesController {
     @CurrentUser() user: any,
     @Body() dto: CreateWorkspaceDto,
   ) {
+
     return this.workspacesService.create(
       user.id,
       dto,
     );
+
   }
 
 
@@ -38,8 +40,11 @@ export class WorkspacesController {
   findAll(
     @CurrentUser() user: any,
   ) {
-    return this.workspacesService.findUserWorkspaces(
+
+    return this.workspacesService.findAll(
       user.id,
     );
+
   }
+
 }
