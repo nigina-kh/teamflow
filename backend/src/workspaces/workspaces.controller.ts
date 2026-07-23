@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Param,
   UseGuards,
 } from '@nestjs/common';
 
@@ -42,6 +43,21 @@ export class WorkspacesController {
   ) {
 
     return this.workspacesService.findAll(
+      user.id,
+    );
+
+  }
+
+
+  @UseGuards(JwtGuard)
+  @Get(':id')
+  findOne(
+    @Param('id') id: string,
+    @CurrentUser() user: any,
+  ) {
+
+    return this.workspacesService.findOne(
+      id,
       user.id,
     );
 
