@@ -1,18 +1,17 @@
-import { IsString, IsOptional } from 'class-validator';
-
+import {
+  IsString,
+  IsOptional,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateProjectDto {
-
   @IsString()
   name: string;
-
 
   @IsOptional()
   @IsString()
   description?: string;
 
-
-  @IsString()
+  @IsUUID()
   workspaceId: string;
-
 }

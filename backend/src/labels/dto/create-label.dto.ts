@@ -1,12 +1,16 @@
-import { IsString } from 'class-validator';
+import {
+  IsString,
+  IsUUID,
+  IsHexColor,
+} from 'class-validator';
 
 export class CreateLabelDto {
-  @IsString()
+  @IsUUID()
   workspaceId: string;
 
   @IsString()
   name: string;
 
-  @IsString()
+  @IsHexColor()
   color: string;
 }

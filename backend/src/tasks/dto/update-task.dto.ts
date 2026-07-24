@@ -2,6 +2,8 @@ import {
   IsEnum,
   IsOptional,
   IsString,
+  IsUUID,
+  IsDateString,
 } from 'class-validator';
 
 import {
@@ -27,10 +29,10 @@ export class UpdateTaskDto {
   status?: TaskStatus;
 
   @IsOptional()
-  @IsString()
+  @IsUUID()
   assigneeId?: string;
 
   @IsOptional()
-  @IsString()
+  @IsDateString()
   dueDate?: string;
 }
