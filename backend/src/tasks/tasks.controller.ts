@@ -1,9 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
-  Patch,
   Param,
+  Patch,
   Post,
   Query,
   UseGuards,
@@ -55,6 +56,18 @@ export class TasksController {
       user.id,
       id,
       dto,
+    );
+  }
+
+  @UseGuards(JwtGuard)
+  @Delete(':id')
+  remove(
+    @CurrentUser() user: any,
+    @Param('id') id: string,
+  ) {
+    return this.tasksService.remove(
+      user.id,
+      id,
     );
   }
 }

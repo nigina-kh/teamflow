@@ -131,4 +131,62 @@ export class TasksService {
       },
     });
   }
+
+  async remove(
+    userId: string,
+    id: string,
+  ) {
+    const task =
+      await this.prisma.task.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          board: {
+            include: {
+              project: true,
+            },
+          },
+        },
+      });
+
+    if (!task) {
+      throw new NotFoundException(
+        'Task not found',
+      );
+    }
+
+    const membership =
+      await this.prisma.workspaceMembership.findUnique({
+        where: {
+          userId_workspaceId: {
+            userId,
+            workspaceId:
+              task.board.project.workspaceId,
+          },
+        },
+      });
+
+    if (!membership) {
+      throw new ForbiddenException(
+        'You are not a workspace member',
+      );
+    }
+
+    await this.prisma.comment.deleteMany({
+      where: {
+        taskId: id,
+      },
+    });
+
+    await this.prisma.task.delete({
+      where: {
+        id,
+      },
+    });
+
+    return {
+      message: 'Task deleted',
+    };
+  }
 }
