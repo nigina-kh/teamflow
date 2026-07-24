@@ -9,6 +9,7 @@ import {
 
 import { WorkspacesService } from './workspaces.service';
 import { CreateWorkspaceDto } from './dto/create-workspace.dto';
+
 import { JwtGuard } from '../auth/jwt/jwt.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
@@ -36,6 +37,7 @@ export class WorkspacesController {
   }
 
 
+
   @UseGuards(JwtGuard)
   @Get()
   findAll(
@@ -49,14 +51,31 @@ export class WorkspacesController {
   }
 
 
+
   @UseGuards(JwtGuard)
   @Get(':id')
   findOne(
-    @Param('id') id: string,
     @CurrentUser() user: any,
+    @Param('id') id: string,
   ) {
 
     return this.workspacesService.findOne(
+      id,
+      user.id,
+    );
+
+  }
+
+
+
+  @UseGuards(JwtGuard)
+  @Get(':id/members')
+  members(
+    @CurrentUser() user: any,
+    @Param('id') id: string,
+  ) {
+
+    return this.workspacesService.members(
       id,
       user.id,
     );

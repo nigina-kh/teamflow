@@ -1,5 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
+
 import { PrismaService } from '../prisma/prisma.service';
+
 
 @Injectable()
 export class WorkspacesService {
@@ -7,6 +13,7 @@ export class WorkspacesService {
   constructor(
     private prisma: PrismaService,
   ) {}
+
 
 
   async create(
@@ -50,6 +57,8 @@ export class WorkspacesService {
 
 
 
+
+
   async findAll(
     userId: string,
   ) {
@@ -74,40 +83,120 @@ export class WorkspacesService {
 
 
 
+
+
   async findOne(
     id: string,
     userId: string,
   ) {
 
-    return this.prisma.workspace.findFirst({
+    const workspace =
+      await this.prisma.workspace.findFirst({
 
-      where: {
-        id,
+        where: {
+          id,
 
-        memberships: {
-          some: {
-            userId,
+          memberships: {
+            some: {
+              userId,
+            },
           },
         },
+
+
+        include: {
+
+          memberships: {
+
+            include: {
+
+              user: {
+
+                select: {
+                  id: true,
+                  email: true,
+                  firstName: true,
+                  lastName: true,
+                },
+
+              },
+
+            },
+
+          },
+
+        },
+
+      });
+
+
+
+    if (!workspace) {
+      throw new NotFoundException(
+        'Workspace not found',
+      );
+    }
+
+
+    return workspace;
+
+  }
+
+
+
+
+
+  async members(
+    workspaceId: string,
+    userId: string,
+  ) {
+
+
+    const membership =
+      await this.prisma.workspaceMembership.findUnique({
+
+        where: {
+
+          userId_workspaceId: {
+
+            userId,
+            workspaceId,
+
+          },
+
+        },
+
+      });
+
+
+
+    if (!membership) {
+
+      throw new ForbiddenException(
+        'You are not a workspace member',
+      );
+
+    }
+
+
+
+    return this.prisma.workspaceMembership.findMany({
+
+      where: {
+        workspaceId,
       },
 
 
       include: {
 
-        memberships: {
+        user: {
 
-          include: {
+          select: {
 
-            user: {
-
-              select: {
-                id: true,
-                email: true,
-                firstName: true,
-                lastName: true,
-              },
-
-            },
+            id: true,
+            email: true,
+            firstName: true,
+            lastName: true,
 
           },
 
@@ -118,5 +207,6 @@ export class WorkspacesService {
     });
 
   }
+
 
 }

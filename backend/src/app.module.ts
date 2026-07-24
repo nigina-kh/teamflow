@@ -10,10 +10,12 @@ import { BoardsModule } from './boards/boards.module';
 import { TasksModule } from './tasks/tasks.module';
 import { CommentsModule } from './comments/comments.module';
 import { LabelsModule } from './labels/labels.module';
+import { InvitationsService } from './invitations/invitations.service';
+import { InvitationsController } from './invitations/invitations.controller';
 
 @Module({
   imports: [PrismaModule, AuthModule, UsersModule, WorkspacesModule, ProjectsModule, BoardsModule, TasksModule, CommentsModule, LabelsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, InvitationsController],
+  providers: [AppService, InvitationsService],
 })
 export class AppModule {}
