@@ -5,6 +5,8 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { DashboardLayout } from './layout/dashboard-layout/dashboard-layout';
 import { Dashboard } from './features/dashboard/dashboard/dashboard';
 
+import { authGuard } from './core/guards/auth.guard';
+
 export const routes: Routes = [
 
   {
@@ -21,6 +23,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DashboardLayout,
+    canActivate: [authGuard],
 
     children: [
 
