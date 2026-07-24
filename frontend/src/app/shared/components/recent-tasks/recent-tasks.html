@@ -1,1 +1,31 @@
-<p>recent-tasks works!</p>
+<div class="card">
+
+    <h2>Recent Tasks</h2>
+
+    @for(task of tasks; track task.title){
+
+        <div class="task">
+
+            <div>
+
+                <h3>{{task.title}}</h3>
+
+                <p>{{task.due}}</p>
+
+            </div>
+
+            <span
+                class="badge"
+                [class.high]="task.priority==='High'"
+                [class.medium]="task.priority==='Medium'"
+                [class.low]="task.priority==='Low'">
+
+                {{task.priority}}
+
+            </span>
+
+        </div>
+
+    }
+
+</div>
