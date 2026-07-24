@@ -11,31 +11,45 @@ import { AuthService } from '../../../core/services/auth';
     FormsModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
 
   email = '';
+
   password = '';
+
   error = '';
 
   constructor(
-    private authService: AuthService,
+    private auth: AuthService,
     private router: Router
   ) {}
 
   login() {
 
     if (!this.email || !this.password) {
+
       this.error = 'Email and password are required';
+
       return;
+
     }
 
-    this.error = '';
+    const success = this.auth.login(
+      this.email,
+      this.password
+    );
 
-    this.authService.login();
+    if (success) {
 
-    this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
+
+      return;
+
+    }
+
+    this.error = 'Invalid credentials';
 
   }
 

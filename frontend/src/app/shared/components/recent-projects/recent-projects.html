@@ -1,0 +1,27 @@
+<div class="card">
+
+  <div class="card-header">
+
+    <h2>Recent Projects</h2>
+
+    <button>View all</button>
+
+  </div>
+
+  @for(project of projects; track project.name){
+
+    <div class="project">
+
+      <div>
+
+        <h3>{{ project.name }}</h3>
+
+        <span>{{ project.status }}</span>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
