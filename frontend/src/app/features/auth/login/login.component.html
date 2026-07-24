@@ -1,0 +1,38 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+  <div class="bg-white p-8 rounded-xl shadow-md w-96">
+
+    <h1 class="text-2xl font-bold mb-6">
+      Login to TeamFlow
+    </h1>
+
+    <input
+      class="border p-2 w-full mb-3 rounded"
+      placeholder="Email"
+      [(ngModel)]="email"
+      type="email"
+    />
+
+    <input
+      class="border p-2 w-full mb-3 rounded"
+      placeholder="Password"
+      [(ngModel)]="password"
+      type="password"
+    />
+
+    @if (error) {
+      <p class="text-red-500 mb-3">
+        {{ error }}
+      </p>
+    }
+
+    <button
+      class="bg-blue-600 text-white w-full py-2 rounded"
+      (click)="login()"
+    >
+      Login
+    </button>
+
+  </div>
+
+</div>
