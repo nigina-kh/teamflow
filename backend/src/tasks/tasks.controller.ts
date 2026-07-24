@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
+  Param,
   Post,
   Query,
   UseGuards,
@@ -9,6 +11,7 @@ import {
 
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 import { JwtGuard } from '../auth/jwt/jwt.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -38,6 +41,20 @@ export class TasksController {
   ) {
     return this.tasksService.findAll(
       boardId,
+    );
+  }
+
+  @UseGuards(JwtGuard)
+  @Patch(':id')
+  update(
+    @CurrentUser() user: any,
+    @Param('id') id: string,
+    @Body() dto: UpdateTaskDto,
+  ) {
+    return this.tasksService.update(
+      user.id,
+      id,
+      dto,
     );
   }
 }
