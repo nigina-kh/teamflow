@@ -1,37 +1,105 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<div class="login-page">
 
-  <div class="bg-white p-8 rounded-xl shadow-md w-96">
+  <div class="background-glow glow-one"></div>
+  <div class="background-glow glow-two"></div>
 
-    <h1 class="text-2xl font-bold mb-6">
-      Login to TeamFlow
+  <div class="login-card">
+
+    <div class="logo">
+
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          d="M7 7h10M7 12h6M7 17h10"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+
+        <circle
+          cx="17"
+          cy="12"
+          r="2"
+          fill="currentColor"
+        />
+      </svg>
+
+    </div>
+
+    <h1>
+      Welcome back
     </h1>
 
-    <input
-      class="border p-2 w-full mb-3 rounded"
-      placeholder="Email"
-      [(ngModel)]="email"
-      type="email"
-    />
+    <p class="subtitle">
+      Sign in to access your projects, tasks, and team workspace.
+    </p>
 
-    <input
-      class="border p-2 w-full mb-3 rounded"
-      placeholder="Password"
-      [(ngModel)]="password"
-      type="password"
-    />
+    <div class="field">
 
-    @if (error) {
-      <p class="text-red-500 mb-3">
+      <label>Email</label>
+
+      <input
+        type="email"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+      >
+
+    </div>
+
+    <div class="field">
+
+      <label>Password</label>
+
+      <input
+        type="password"
+        placeholder="••••••••"
+        [(ngModel)]="password"
+      >
+
+    </div>
+
+    @if(error){
+
+      <p class="error">
         {{ error }}
       </p>
+
     }
 
     <button
-      class="bg-blue-600 text-white w-full py-2 rounded"
+      type="button"
       (click)="login()"
     >
-      Login
+
+      Sign In
+
+      <svg
+        class="arrow"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M5 12h13M13 6l6 6-6 6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+
     </button>
+
+    <div class="footer">
+
+      <span>
+        TeamFlow © 2026
+      </span>
+
+    </div>
 
   </div>
 
