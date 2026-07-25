@@ -1,27 +1,30 @@
 <div class="card">
 
-  <div class="card-header">
-
     <h2>Recent Projects</h2>
 
-    <button>View all</button>
+    @for(project of projects; track project.name){
 
-  </div>
+        <div class="project">
 
-  @for(project of projects; track project.name){
+            <div class="header">
 
-    <div class="project">
+                <span>{{project.name}}</span>
 
-      <div>
+                <span>{{project.progress}}%</span>
 
-        <h3>{{ project.name }}</h3>
+            </div>
 
-        <span>{{ project.status }}</span>
+            <div class="bar">
 
-      </div>
+                <div
+                    class="fill"
+                    [style.width.%]="project.progress">
+                </div>
 
-    </div>
+            </div>
 
-  }
+        </div>
+
+    }
 
 </div>

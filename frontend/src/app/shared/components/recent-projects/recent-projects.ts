@@ -10,18 +10,22 @@ import { Component } from '@angular/core';
 export class RecentProjects {
 
   projects = [
+
     {
-      name: 'TeamFlow Website',
-      status: 'In Progress'
+      name: 'Website Redesign',
+      progress: 82
     },
+
     {
-      name: 'Cinema Booking',
-      status: 'Review'
+      name: 'Mobile App',
+      progress: 61
     },
+
     {
-      name: 'Inventory System',
-      status: 'Completed'
+      name: 'Marketing Campaign',
+      progress: 38
     }
+
   ];
 
 }

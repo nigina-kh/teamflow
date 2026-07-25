@@ -1,1 +1,29 @@
-<p>activity-feed works!</p>
+<div class="card">
+
+    <h2>Activity Feed</h2>
+
+    @for(activity of activities; track activity.time){
+
+        <div class="activity">
+
+            <div class="dot"></div>
+
+            <div>
+
+                <p>
+
+                    <strong>{{activity.user}}</strong>
+
+                    {{activity.action}}
+
+                </p>
+
+                <span>{{activity.time}}</span>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
