@@ -11,19 +11,20 @@ export class RecentTasks {
 
   tasks = [
     {
-      title: 'Design Dashboard UI',
-      priority: 'High',
-      due: 'Today'
+      title: 'Design Login Screen',
+      status: 'Done'
     },
     {
-      title: 'Fix Login Validation',
-      priority: 'Medium',
-      due: 'Tomorrow'
+      title: 'Implement Dashboard',
+      status: 'In Progress'
     },
     {
-      title: 'Update Documentation',
-      priority: 'Low',
-      due: 'Jul 28'
+      title: 'Create REST API',
+      status: 'Pending'
+    },
+    {
+      title: 'Write Documentation',
+      status: 'Pending'
     }
   ];
 

@@ -11,24 +11,20 @@ export class ActivityFeed {
 
   activities = [
     {
-      user: 'Alex',
-      action: 'created a new project',
+      text: 'Emma created Project Alpha',
       time: '5 min ago'
     },
     {
-      user: 'Sarah',
-      action: 'completed a task',
-      time: '28 min ago'
+      text: 'Liam completed Task #24',
+      time: '20 min ago'
     },
     {
-      user: 'Daniel',
-      action: 'invited a new member',
+      text: 'Sophia invited a new member',
       time: '1 hour ago'
     },
     {
-      user: 'Emma',
-      action: 'updated project settings',
-      time: 'Yesterday'
+      text: 'System backup completed',
+      time: '3 hours ago'
     }
   ];
 

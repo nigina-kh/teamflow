@@ -6,15 +6,26 @@ import { RecentTasks } from '../../../shared/components/recent-tasks/recent-task
 import { ActivityFeed } from '../../../shared/components/activity-feed/activity-feed';
 
 @Component({
+
   selector: 'app-dashboard',
+
   standalone: true,
+
   imports: [
+
     StatCard,
     RecentProjects,
     RecentTasks,
     ActivityFeed
+
   ],
+
   templateUrl: './dashboard.html',
+
   styleUrl: './dashboard.scss'
+
 })
-export class Dashboard {}
+
+export class Dashboard {
+
+}

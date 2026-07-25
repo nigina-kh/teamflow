@@ -12,18 +12,23 @@ export class RecentProjects {
   projects = [
 
     {
-      name: 'Website Redesign',
-      progress: 82
+      name: 'Digital Cinema',
+      status: 'In Progress'
+    },
+
+    {
+      name: 'TeamFlow Website',
+      status: 'Review'
+    },
+
+    {
+      name: 'Backend API',
+      status: 'Completed'
     },
 
     {
       name: 'Mobile App',
-      progress: 61
-    },
-
-    {
-      name: 'Marketing Campaign',
-      progress: 38
+      status: 'Planning'
     }
 
   ];

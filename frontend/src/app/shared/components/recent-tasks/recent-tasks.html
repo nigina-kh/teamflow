@@ -1,31 +1,28 @@
-<div class="card">
+<div class="panel">
 
-    <h2>Recent Tasks</h2>
+  <h2>
+    Recent Tasks
+  </h2>
 
-    @for(task of tasks; track task.title){
+  @for(task of tasks; track task.title){
 
-        <div class="task">
+    <div class="task">
 
-            <div>
+      <span class="title">
+        {{ task.title }}
+      </span>
 
-                <h3>{{task.title}}</h3>
+      <span
+        class="badge"
+        [class.done]="task.status === 'Done'"
+        [class.progress]="task.status === 'In Progress'"
+        [class.pending]="task.status === 'Pending'"
+      >
+        {{ task.status }}
+      </span>
 
-                <p>{{task.due}}</p>
+    </div>
 
-            </div>
-
-            <span
-                class="badge"
-                [class.high]="task.priority==='High'"
-                [class.medium]="task.priority==='Medium'"
-                [class.low]="task.priority==='Low'">
-
-                {{task.priority}}
-
-            </span>
-
-        </div>
-
-    }
+  }
 
 </div>

@@ -1,29 +1,29 @@
-<div class="card">
+<div class="panel">
 
-    <h2>Activity Feed</h2>
+  <h2>
+    Activity Feed
+  </h2>
 
-    @for(activity of activities; track activity.time){
+  @for(activity of activities; track activity.text){
 
-        <div class="activity">
+    <div class="activity">
 
-            <div class="dot"></div>
+      <div class="dot"></div>
 
-            <div>
+      <div>
 
-                <p>
-
-                    <strong>{{activity.user}}</strong>
-
-                    {{activity.action}}
-
-                </p>
-
-                <span>{{activity.time}}</span>
-
-            </div>
-
+        <div class="text">
+          {{ activity.text }}
         </div>
 
-    }
+        <div class="time">
+          {{ activity.time }}
+        </div>
+
+      </div>
+
+    </div>
+
+  }
 
 </div>

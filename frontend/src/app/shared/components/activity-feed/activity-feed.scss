@@ -1,71 +1,73 @@
-.card {
+.panel {
 
-    background:#18181B;
+  background: var(--surface);
 
-    border-radius:18px;
+  border: 1px solid var(--border);
 
-    padding:24px;
+  border-radius: 22px;
 
-    border:1px solid rgba(255,255,255,.06);
+  padding: 24px;
 
-}
-
-h2{
-
-    margin:0 0 22px;
-
-    color:white;
-
-    font-size:20px;
+  backdrop-filter: blur(24px);
 
 }
 
-.activity{
+h2 {
 
-    display:flex;
+  margin: 0 0 20px;
 
-    gap:14px;
+  color: var(--text);
 
-    padding:16px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.05);
+  font-size: 20px;
 
 }
 
-.activity:last-child{
+.activity {
 
-    border-bottom:none;
+  display: flex;
 
-}
+  gap: 14px;
 
-.dot{
-
-    width:10px;
-
-    height:10px;
-
-    margin-top:6px;
-
-    border-radius:50%;
-
-    background:#3B82F6;
+  margin-bottom: 20px;
 
 }
 
-p{
+.activity:last-child {
 
-    margin:0;
-
-    color:white;
-
-    line-height:1.5;
+  margin-bottom: 0;
 
 }
 
-span{
+.dot {
 
-    color:#9CA3AF;
+  width: 10px;
 
-    font-size:13px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  margin-top: 8px;
+
+  flex-shrink: 0;
+
+}
+
+.text {
+
+  color: var(--text);
+
+  font-weight: 500;
+
+}
+
+.time {
+
+  margin-top: 4px;
+
+  font-size: 13px;
+
+  color: var(--muted);
 
 }

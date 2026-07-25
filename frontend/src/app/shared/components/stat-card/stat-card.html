@@ -1,15 +1,16 @@
 <div class="card">
 
-  <span class="label">
-    Active Projects
-  </span>
+  <div
+    class="indicator"
+    [style.background]="color">
+  </div>
 
-  <h2>
-    12
-  </h2>
+  <div class="label">
+    {{ label }}
+  </div>
 
-  <p>
-    +2 this week
-  </p>
+  <div class="value">
+    {{ value }}
+  </div>
 
 </div>

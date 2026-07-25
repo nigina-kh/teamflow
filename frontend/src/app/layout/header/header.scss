@@ -1,18 +1,47 @@
-.header {
+.header{
 
-  height: 72px;
-  background: white;
-  display: flex;
-  align-items: center;
-  padding: 0 32px;
-  border-bottom: 1px solid #E2E8F0;
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:28px 32px;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  background:rgba(18,18,20,.65);
+
+  backdrop-filter:blur(20px);
 
 }
 
-h1 {
+.header h1{
 
-  margin: 0;
+  color:white;
 
-  font-size: 24px;
+  margin:0;
+
+  font-size:28px;
+
+}
+
+.subtitle{
+
+  color:#8B8B95;
+
+  margin-top:6px;
+
+}
+
+.avatar{
+
+  width:44px;
+
+  height:44px;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#2563EB,#3B82F6);
 
 }

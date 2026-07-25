@@ -1,44 +1,95 @@
 :host {
+
   display: block;
+
+  width: 100%;
+
 }
 
-.page-title {
+.dashboard {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 30px;
+
+}
+
+.dashboard-title h1 {
+
   margin: 0;
-  color: white;
-  font-size: 2rem;
+
+  color: var(--text);
+
+  font-size: 34px;
+
   font-weight: 700;
+
 }
 
-.page-subtitle {
-  margin: 8px 0 32px;
-  color: #9ca3af;
+.dashboard-title p {
+
+  margin-top: 10px;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
 }
 
 .stats {
+
   display: grid;
+
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
+
+  gap: 22px;
+
 }
 
-.dashboard-grid {
+.widgets {
+
   display: grid;
+
   grid-template-columns: 2fr 1fr;
+
   gap: 24px;
+
 }
 
-.dashboard-grid app-activity-feed {
-  grid-column: 1 / -1;
+.left {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+
 }
 
-@media (max-width: 1100px) {
+.right {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+
+}
+
+@media (max-width: 1200px) {
 
   .stats {
+
     grid-template-columns: repeat(2, 1fr);
+
   }
 
-  .dashboard-grid {
+  .widgets {
+
     grid-template-columns: 1fr;
+
   }
 
 }
@@ -46,7 +97,9 @@
 @media (max-width: 700px) {
 
   .stats {
+
     grid-template-columns: 1fr;
+
   }
 
 }

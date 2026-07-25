@@ -1,26 +1,52 @@
-<h1 class="page-title">
-  Dashboard
-</h1>
+<div class="dashboard">
 
-<p class="page-subtitle">
-  Welcome back! Here's an overview of your workspace.
-</p>
+    <div class="dashboard-title">
 
-<section class="stats">
+        <h1>
 
-  <app-stat-card></app-stat-card>
-  <app-stat-card></app-stat-card>
-  <app-stat-card></app-stat-card>
-  <app-stat-card></app-stat-card>
+            Good morning 👋
 
-</section>
+        </h1>
 
-<section class="dashboard-grid">
+        <p>
 
-  <app-recent-projects></app-recent-projects>
+            Here's what's happening in your workspace today.
 
-  <app-recent-tasks></app-recent-tasks>
+        </p>
 
-  <app-activity-feed></app-activity-feed>
+    </div>
 
-</section>
+
+    <div class="stats">
+
+        <app-stat-card></app-stat-card>
+
+        <app-stat-card></app-stat-card>
+
+        <app-stat-card></app-stat-card>
+
+        <app-stat-card></app-stat-card>
+
+    </div>
+
+
+    <div class="widgets">
+
+        <div class="left">
+
+            <app-recent-projects></app-recent-projects>
+
+            <app-activity-feed></app-activity-feed>
+
+        </div>
+
+
+        <div class="right">
+
+            <app-recent-tasks></app-recent-tasks>
+
+        </div>
+
+    </div>
+
+</div>
