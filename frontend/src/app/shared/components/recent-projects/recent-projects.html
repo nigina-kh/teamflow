@@ -1,19 +1,13 @@
 <div class="panel">
 
-  <h2>
-    Recent Projects
-  </h2>
+  <h2>Recent Projects</h2>
 
-  @for (project of projects; track project.name) {
+  @for (project of projectsService.projects(); track project.id) {
 
     <div class="project">
 
-      <div>
-
-        <div class="name">
-          {{ project.name }}
-        </div>
-
+      <div class="name">
+        {{ project.name }}
       </div>
 
       <div class="status">

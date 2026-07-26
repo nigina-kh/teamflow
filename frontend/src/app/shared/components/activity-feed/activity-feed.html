@@ -1,23 +1,23 @@
 <div class="panel">
 
-  <h2>
-    Activity Feed
-  </h2>
+  <h2>Activity</h2>
 
-  @for(activity of activities; track activity.text){
+  @for(activity of activities; track activity.action){
 
     <div class="activity">
 
-      <div class="dot"></div>
+      <div class="avatar">
+        {{ activity.user[0] }}
+      </div>
 
       <div>
 
-        <div class="text">
-          {{ activity.text }}
+        <div class="user">
+          {{ activity.user }}
         </div>
 
-        <div class="time">
-          {{ activity.time }}
+        <div class="action">
+          {{ activity.action }}
         </div>
 
       </div>

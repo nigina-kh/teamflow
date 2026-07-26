@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ProjectsService } from '../../../core/services/projects.service';
 
 @Component({
   selector: 'app-recent-projects',
@@ -9,28 +10,6 @@ import { Component } from '@angular/core';
 })
 export class RecentProjects {
 
-  projects = [
-
-    {
-      name: 'Digital Cinema',
-      status: 'In Progress'
-    },
-
-    {
-      name: 'TeamFlow Website',
-      status: 'Review'
-    },
-
-    {
-      name: 'Backend API',
-      status: 'Completed'
-    },
-
-    {
-      name: 'Mobile App',
-      status: 'Planning'
-    }
-
-  ];
+  projectsService = inject(ProjectsService);
 
 }

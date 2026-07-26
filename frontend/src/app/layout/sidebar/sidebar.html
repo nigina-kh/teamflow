@@ -1,46 +1,88 @@
 <nav class="sidebar">
 
   <div class="logo">
-    <span class="logo-icon">TF</span>
+
+    <div class="logo-icon">
+      ⚡
+    </div>
 
     <div class="logo-text">
       <h2>TeamFlow</h2>
-      <p>Project Management</p>
+      <p>Workspace</p>
     </div>
+
   </div>
 
-  <ul>
+  <ul class="menu">
 
     <li>
-      <a routerLink="/dashboard">
-        Dashboard
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+
+        <i class="pi pi-home"></i>
+        <span>Dashboard</span>
+
       </a>
     </li>
 
     <li>
-      <a>
-        Projects
+      <a
+        routerLink="/projects"
+        routerLinkActive="active">
+
+        <i class="pi pi-folder"></i>
+        <span>Projects</span>
+
       </a>
     </li>
 
     <li>
-      <a>
-        Tasks
+      <a
+        routerLink="/tasks"
+        routerLinkActive="active">
+
+        <i class="pi pi-check-square"></i>
+        <span>Tasks</span>
+
       </a>
     </li>
 
     <li>
-      <a>
-        Team
+      <a
+        routerLink="/team"
+        routerLinkActive="active">
+
+        <i class="pi pi-users"></i>
+        <span>Team</span>
+
       </a>
     </li>
 
     <li>
-      <a>
-        Settings
+      <a
+        routerLink="/settings"
+        routerLinkActive="active">
+
+        <i class="pi pi-cog"></i>
+        <span>Settings</span>
+
       </a>
     </li>
 
   </ul>
+
+  <div class="logout">
+
+    <button type="button">
+
+      <i class="pi pi-sign-out"></i>
+
+      <span>Logout</span>
+
+    </button>
+
+  </div>
 
 </nav>

@@ -5,13 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
+  private readonly TOKEN_KEY = 'token';
+
   login(email: string, password: string): boolean {
 
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       return false;
     }
 
-    localStorage.setItem('token', 'demo-token');
+    localStorage.setItem(this.TOKEN_KEY, 'demo-token');
 
     return true;
 
@@ -19,13 +21,13 @@ export class AuthService {
 
   logout(): void {
 
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_KEY);
 
   }
 
   isLoggedIn(): boolean {
 
-    return !!localStorage.getItem('token');
+    return localStorage.getItem(this.TOKEN_KEY) !== null;
 
   }
 

@@ -13,6 +13,8 @@ export class StatCard {
 
   @Input() value = '';
 
+  @Input() change = '';
+
   @Input() color = '#2563EB';
 
 }

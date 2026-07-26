@@ -15,9 +15,9 @@
           d="M7 7h10M7 12h6M7 17h10"
           fill="none"
           stroke="currentColor"
+          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          stroke-width="2"
         />
 
         <circle
@@ -26,78 +26,261 @@
           r="2"
           fill="currentColor"
         />
+
       </svg>
 
     </div>
 
-    <h1>
-      Welcome back
-    </h1>
+    <h1>Welcome back</h1>
 
     <p class="subtitle">
-      Sign in to access your projects, tasks, and team workspace.
+      Sign in to access your projects, tasks and team workspace.
     </p>
 
-    <div class="field">
-
-      <label>Email</label>
-
-      <input
-        type="email"
-        placeholder="you@example.com"
-        [(ngModel)]="email"
-      >
-
-    </div>
-
-    <div class="field">
-
-      <label>Password</label>
-
-      <input
-        type="password"
-        placeholder="••••••••"
-        [(ngModel)]="password"
-      >
-
-    </div>
-
-    @if(error){
-
-      <p class="error">
-        {{ error }}
-      </p>
-
-    }
-
-    <button
-      type="button"
-      (click)="login()"
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+      autocomplete="on"
+      novalidate
     >
 
-      Sign In
+      <!-- EMAIL -->
 
-      <svg
-        class="arrow"
-        viewBox="0 0 24 24"
+      <div class="field">
+
+        <label for="email">
+          Email
+        </label>
+
+        <input
+          id="email"
+          name="email"
+          type="email"
+          formControlName="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          inputmode="email"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          (input)="updateSuggestions()"
+        >
+
+        @if(emailSuggestions.length){
+
+          <div class="suggestions">
+
+            @for(item of emailSuggestions; track item){
+
+              <button
+                type="button"
+                class="suggestion"
+                (click)="selectSuggestion(item)"
+              >
+
+                {{ item }}
+
+              </button>
+
+            }
+
+          </div>
+
+        }
+
+        @if(email?.touched && email?.invalid){
+
+          <div class="error-list">
+
+            @if(email?.errors?.['required']){
+
+              <div>• Email is required</div>
+
+            }
+
+            @if(email?.errors?.['email']){
+
+              <div>• Please enter a valid email address</div>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+      <!-- PASSWORD -->
+
+      <div class="field">
+
+        <label for="password">
+
+          Password
+
+        </label>
+
+        <div class="password-wrapper">
+
+          <input
+            id="password"
+            name="password"
+            [type]="hidePassword ? 'password' : 'text'"
+            formControlName="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+          >
+
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePassword()"
+            [attr.aria-label]="hidePassword ? 'Show password' : 'Hide password'"
+          >
+
+            <i
+              class="pi"
+              [class.pi-eye]="hidePassword"
+              [class.pi-eye-slash]="!hidePassword"
+            ></i>
+
+          </button>
+
+        </div>
+
+        @if(password?.touched){
+
+          <div class="requirements">
+
+            <div
+              [class.valid]="(password?.value?.length ?? 0) >= 8"
+            >
+              ✓ At least 8 characters
+            </div>
+
+            <div
+              [class.valid]="/[A-Z]/.test(password?.value || '')"
+            >
+              ✓ One uppercase letter
+            </div>
+
+            <div
+              [class.valid]="/[a-z]/.test(password?.value || '')"
+            >
+              ✓ One lowercase letter
+            </div>
+
+            <div
+              [class.valid]="/\d/.test(password?.value || '')"
+            >
+              ✓ One number
+            </div>
+
+            <div
+              [class.valid]="/[@$!%*?&._#-]/.test(password?.value || '')"
+            >
+              ✓ One special character
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+      <!-- OPTIONS -->
+
+      <div class="login-options">
+
+        <label class="remember">
+
+          <input
+            type="checkbox"
+            formControlName="rememberMe"
+          >
+
+          <span>
+
+            Remember me
+
+          </span>
+
+        </label>
+
+        <button
+          type="button"
+          class="forgot-password"
+        >
+
+          Forgot password?
+
+        </button>
+
+      </div>
+
+      <!-- LOGIN -->
+
+      <button
+        class="login-button"
+        type="submit"
+        [disabled]="loading || loginForm.invalid"
       >
-        <path
-          d="M5 12h13M13 6l6 6-6 6"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
 
-    </button>
+        @if(!loading){
+
+          <span>
+
+            Sign In
+
+          </span>
+
+        } @else {
+
+          <span>
+
+            Signing In...
+
+          </span>
+
+        }
+
+        <svg
+          class="arrow"
+          viewBox="0 0 24 24"
+        >
+
+          <path
+            d="M5 12h13M13 6l6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+        </svg>
+
+      </button>
+
+      @if(error){
+
+        <div class="error-list">
+
+          <div>
+
+            {{ error }}
+
+          </div>
+
+        </div>
+
+      }
+
+    </form>
 
     <div class="footer">
 
-      <span>
-        TeamFlow © 2026
-      </span>
+      TeamFlow © 2026
 
     </div>
 
