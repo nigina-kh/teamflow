@@ -6,34 +6,36 @@ import {
 
 import {
   Observable,
-  tap
+  tap,
 } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  private readonly API_URL = 'http://localhost:3000/auth';
+  private readonly API_URL =
+    'http://localhost:3000/auth';
 
-  private readonly TOKEN_KEY = 'access_token';
+  private readonly TOKEN_KEY =
+    'access_token';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   login(
     email: string,
     password: string,
-    rememberMe: boolean
+    rememberMe: boolean,
   ): Observable<{ access_token: string }> {
 
     return this.http.post<{ access_token: string }>(
       `${this.API_URL}/login`,
       {
         email,
-        password
-      }
+        password,
+      },
     ).pipe(
 
       tap(response => {
@@ -42,27 +44,27 @@ export class AuthService {
 
           localStorage.setItem(
             this.TOKEN_KEY,
-            response.access_token
+            response.access_token,
           );
 
           sessionStorage.removeItem(
-            this.TOKEN_KEY
+            this.TOKEN_KEY,
           );
 
         } else {
 
           sessionStorage.setItem(
             this.TOKEN_KEY,
-            response.access_token
+            response.access_token,
           );
 
           localStorage.removeItem(
-            this.TOKEN_KEY
+            this.TOKEN_KEY,
           );
 
         }
 
-      })
+      }),
 
     );
 
@@ -70,9 +72,13 @@ export class AuthService {
 
   logout(): void {
 
-    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(
+      this.TOKEN_KEY,
+    );
 
-    sessionStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(
+      this.TOKEN_KEY,
+    );
 
   }
 
@@ -97,12 +103,10 @@ export class AuthService {
       `${this.API_URL}/me`,
       {
         headers: new HttpHeaders({
-
           Authorization:
-            `Bearer ${this.getToken()}`
-
-        })
-      }
+            `Bearer ${this.getToken()}`,
+        }),
+      },
     );
 
   }

@@ -3,9 +3,10 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AuthService } from '../../../core/services/auth';
 
@@ -13,10 +14,11 @@ import { AuthService } from '../../../core/services/auth';
   selector: 'app-login',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    CommonModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
 
@@ -28,30 +30,21 @@ export class LoginComponent {
 
   emailSuggestions: string[] = [];
 
-  private readonly domains: string[] = [
-
+  private readonly domains = [
     'gmail.com',
     'googlemail.com',
-
     'outlook.com',
     'hotmail.com',
     'live.com',
-
     'icloud.com',
     'me.com',
-
     'yahoo.com',
-
     'proton.me',
     'protonmail.com',
-
     'yandex.com',
     'mail.ru',
-
     'gmx.com',
-
-    'zoho.com'
-
+    'zoho.com',
   ];
 
   loginForm: FormGroup;
@@ -59,7 +52,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
   ) {
 
     this.loginForm = this.fb.group({
@@ -68,8 +61,8 @@ export class LoginComponent {
         '',
         [
           Validators.required,
-          Validators.email
-        ]
+          Validators.email,
+        ],
       ],
 
       password: [
@@ -78,14 +71,12 @@ export class LoginComponent {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._#-]).+$/
-          )
-        ]
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._#-]).+$/,
+          ),
+        ],
       ],
 
-      rememberMe: [
-        false
-      ]
+      rememberMe: [false],
 
     });
 
@@ -104,9 +95,7 @@ export class LoginComponent {
   }
 
   togglePassword(): void {
-
     this.hidePassword = !this.hidePassword;
-
   }
 
   updateSuggestions(): void {
@@ -129,13 +118,12 @@ export class LoginComponent {
 
       this.emailSuggestions = this.domains
         .filter(domain =>
-          domain.startsWith(typedDomain.toLowerCase())
+          domain.startsWith(typedDomain.toLowerCase()),
         )
         .map(domain => `${username}@${domain}`)
         .slice(0, 6);
 
       return;
-
     }
 
     this.emailSuggestions = this.domains
@@ -172,27 +160,31 @@ export class LoginComponent {
 
     this.emailSuggestions = [];
 
-    const email = this.email?.value.trim();
+    this.auth.login(
+      this.email!.value.trim(),
+      this.password!.value,
+      this.rememberMe!.value,
+    ).subscribe({
 
-    const password = this.password?.value;
+      next: () => {
 
-    setTimeout(() => {
-
-      const success = this.auth.login(email, password);
-
-      this.loading = false;
-
-      if (success) {
+        this.loading = false;
 
         this.router.navigate(['/dashboard']);
 
-      } else {
+      },
 
-        this.error = 'Invalid email or password.';
+      error: (err: any) => {
 
-      }
+        this.loading = false;
 
-    }, 800);
+        this.error =
+          err?.error?.message ??
+          'Invalid email or password.';
+
+      },
+
+    });
 
   }
 
