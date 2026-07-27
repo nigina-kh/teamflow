@@ -7,6 +7,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
+import {
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -32,6 +36,7 @@ export class AuthController {
     return this.authService.login(dto);
   }
 
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
   @Get('me')
   me(@Request() req: any) {

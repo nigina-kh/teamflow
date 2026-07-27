@@ -1,24 +1,26 @@
 import {
-    Controller,
-    Get,
-    UseGuards,
-  } from '@nestjs/common';
-  
-  import { JwtGuard } from '../auth/jwt/jwt.guard';
-  
-  import { DashboardService } from './dashboard.service';
-  
-  @Controller('dashboard')
+  Controller,
+  Get,
+  UseGuards,
+} from '@nestjs/common';
+
+import {
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+
+import { JwtGuard } from '../auth/jwt/jwt.guard';
+import { DashboardService } from './dashboard.service';
+
+@Controller('dashboard')
+export class DashboardController {
+  constructor(
+    private dashboardService: DashboardService,
+  ) {}
+
+  @ApiBearerAuth('access-token')
   @UseGuards(JwtGuard)
-  export class DashboardController {
-  
-    constructor(
-      private dashboardService: DashboardService,
-    ) {}
-  
-    @Get()
-    getDashboard() {
-      return this.dashboardService.getDashboard();
-    }
-  
+  @Get()
+  getDashboard() {
+    return this.dashboardService.getDashboard();
   }
+}
