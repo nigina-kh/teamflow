@@ -1,9 +1,6 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 
 import { StatCard } from '../../../shared/components/stat-card/stat-card';
-import { RecentProjects } from '../../../shared/components/recent-projects/recent-projects';
-import { RecentTasks } from '../../../shared/components/recent-tasks/recent-tasks';
-import { ActivityFeed } from '../../../shared/components/activity-feed/activity-feed';
 
 import { DashboardService } from '../../../core/services/dashboard.service';
 
@@ -12,9 +9,6 @@ import { DashboardService } from '../../../core/services/dashboard.service';
   standalone: true,
   imports: [
     StatCard,
-    RecentProjects,
-    RecentTasks,
-    ActivityFeed,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
@@ -24,6 +18,10 @@ export class Dashboard implements OnInit {
   private readonly dashboardService = inject(DashboardService);
 
   stats = signal<any[]>([]);
+
+  projects = signal<any[]>([]);
+
+  tasks = signal<any[]>([]);
 
   ngOnInit(): void {
 
@@ -58,10 +56,14 @@ export class Dashboard implements OnInit {
           },
         ]);
 
+        this.projects.set(data.projects);
+
+        this.tasks.set(data.tasks);
+
       },
 
       error: (err) => {
-        console.error(err);
+        console.error('Failed to load dashboard:', err);
       },
 
     });
