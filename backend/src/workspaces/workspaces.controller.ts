@@ -7,20 +7,24 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
+import {
+  ApiBearerAuth,
+  ApiTags,
+} from '@nestjs/swagger';
+
 import { WorkspacesService } from './workspaces.service';
 import { CreateWorkspaceDto } from './dto/create-workspace.dto';
 
 import { JwtGuard } from '../auth/jwt/jwt.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
-
+@ApiTags('Workspaces')
+@ApiBearerAuth()
 @Controller('workspaces')
 export class WorkspacesController {
-
   constructor(
     private readonly workspacesService: WorkspacesService,
   ) {}
-
 
   @UseGuards(JwtGuard)
   @Post()
@@ -28,29 +32,21 @@ export class WorkspacesController {
     @CurrentUser() user: any,
     @Body() dto: CreateWorkspaceDto,
   ) {
-
     return this.workspacesService.create(
       user.id,
       dto,
     );
-
   }
-
-
 
   @UseGuards(JwtGuard)
   @Get()
   findAll(
     @CurrentUser() user: any,
   ) {
-
     return this.workspacesService.findAll(
       user.id,
     );
-
   }
-
-
 
   @UseGuards(JwtGuard)
   @Get(':id')
@@ -58,15 +54,11 @@ export class WorkspacesController {
     @CurrentUser() user: any,
     @Param('id') id: string,
   ) {
-
     return this.workspacesService.findOne(
       id,
       user.id,
     );
-
   }
-
-
 
   @UseGuards(JwtGuard)
   @Get(':id/members')
@@ -74,12 +66,9 @@ export class WorkspacesController {
     @CurrentUser() user: any,
     @Param('id') id: string,
   ) {
-
     return this.workspacesService.members(
       id,
       user.id,
     );
-
   }
-
 }

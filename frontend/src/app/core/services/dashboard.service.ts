@@ -1,35 +1,21 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DashboardService {
 
-  stats = signal([
-    {
-      label: 'Active Projects',
-      value: '12',
-      change: '+8%',
-      color: '#2563EB'
-    },
-    {
-      label: 'Completed Tasks',
-      value: '124',
-      change: '+16%',
-      color: '#22C55E'
-    },
-    {
-      label: 'Team Members',
-      value: '8',
-      change: '+2',
-      color: '#A855F7'
-    },
-    {
-      label: 'Deadlines',
-      value: '5',
-      change: '-1',
-      color: '#F97316'
-    }
-  ]);
+  private readonly http = inject(HttpClient);
+
+  private readonly api = environment.apiUrl;
+
+  getDashboard() {
+    return this.http.get<any>(
+      `${this.api}/dashboard`,
+    );
+  }
 
 }
