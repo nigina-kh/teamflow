@@ -1,5 +1,9 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 import { ProjectsService } from '../../../core/services/projects.service';
 
@@ -7,7 +11,7 @@ import { ProjectsService } from '../../../core/services/projects.service';
   selector: 'app-projects',
   standalone: true,
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './projects.html',
   styleUrl: './projects.scss',
@@ -17,17 +21,31 @@ export class Projects implements OnInit {
   private readonly projectsService =
     inject(ProjectsService);
 
+  private readonly fb =
+    inject(FormBuilder);
+
+  loading = false;
+
   projects = signal<any[]>([]);
 
-  projectName = '';
+  form = this.fb.group({
 
-  projectDescription = '';
+    name: [
+      '',
+      Validators.required,
+    ],
+
+    description: [''],
+
+  });
 
   ngOnInit(): void {
+
     this.loadProjects();
+
   }
 
-  loadProjects() {
+  loadProjects(): void {
 
     this.projectsService
       .getProjects()
@@ -40,6 +58,46 @@ export class Projects implements OnInit {
         },
 
         error: console.error,
+
+      });
+
+  }
+
+  createProject(): void {
+
+    if (
+      this.loading ||
+      this.form.invalid
+    ) {
+      return;
+    }
+
+    this.loading = true;
+
+    this.projectsService
+      .createProject(
+        this.form.value.name!,
+        this.form.value.description ?? '',
+      )
+      .subscribe({
+
+        next: () => {
+
+          this.loading = false;
+
+          this.form.reset();
+
+          this.loadProjects();
+
+        },
+
+        error: err => {
+
+          this.loading = false;
+
+          console.error(err);
+
+        },
 
       });
 

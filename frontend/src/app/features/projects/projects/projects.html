@@ -4,7 +4,9 @@
 
     <div>
 
-      <h1>Projects</h1>
+      <h1>
+        Projects
+      </h1>
 
       <p>
         Manage all your workspace projects.
@@ -16,28 +18,43 @@
 
   <div class="create-card">
 
-    <h2>Create Project</h2>
-
-    <input
-      type="text"
-      placeholder="Project name"
-      [(ngModel)]="projectName">
-
-    <textarea
-      rows="4"
-      placeholder="Project description"
-      [(ngModel)]="projectDescription">
-    </textarea>
-
-    <button>
+    <h2>
       Create Project
-    </button>
+    </h2>
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="createProject()"
+      class="create-form">
+
+      <input
+        type="text"
+        placeholder="Project name"
+        formControlName="name">
+
+      <textarea
+        rows="4"
+        placeholder="Project description"
+        formControlName="description">
+      </textarea>
+
+      <button
+        type="submit"
+        [disabled]="loading">
+
+        {{ loading ? 'Creating...' : 'Create Project' }}
+
+      </button>
+
+    </form>
 
   </div>
 
   <div class="projects-card">
 
-    <h2>Projects</h2>
+    <h2>
+      Projects
+    </h2>
 
     @if (projects().length === 0) {
 

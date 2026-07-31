@@ -11,6 +11,8 @@ export const authInterceptor: HttpInterceptorFn = (
     localStorage.getItem('access_token') ??
     sessionStorage.getItem('access_token');
 
+  console.log('Interceptor token:', token);
+
   if (!token) {
     return next(req);
   }
@@ -24,6 +26,11 @@ export const authInterceptor: HttpInterceptorFn = (
     },
 
   });
+
+  console.log(
+    'Authorization header:',
+    authReq.headers.get('Authorization'),
+  );
 
   return next(authReq);
 
