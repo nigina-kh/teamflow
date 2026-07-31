@@ -37,73 +37,73 @@
 
   <section class="content-grid">
 
-    <div class="main-column">
+    <div class="panel">
 
-      <div class="card">
+      <h2>
+        Recent Projects
+      </h2>
 
-        <h2>Recent Projects</h2>
+      @if (projects().length === 0) {
 
-        @if (projects().length === 0) {
+        <p>No projects yet.</p>
 
-          <p>No projects yet.</p>
+      }
 
-        } @else {
+      @for (project of projects(); track project.id) {
 
-          @for (project of projects(); track project.id) {
+        <div class="project">
 
-            <div class="item">
+          <div>
 
-              <strong>{{ project.name }}</strong>
+            {{ project.name }}
 
-              @if (project.status) {
+          </div>
 
-                <span>{{ project.status }}</span>
+          <div class="status">
 
-              }
+            {{ project.status }}
 
-            </div>
+          </div>
 
-          }
+        </div>
 
-        }
-
-      </div>
+      }
 
     </div>
 
-    <aside class="side-column">
+    <div class="panel">
 
-      <div class="card">
+      <h2>
+        Recent Tasks
+      </h2>
 
-        <h2>Recent Tasks</h2>
+      @if (tasks().length === 0) {
 
-        @if (tasks().length === 0) {
+        <p>No tasks yet.</p>
 
-          <p>No tasks yet.</p>
+      }
 
-        } @else {
+      @for (task of tasks(); track task.id) {
 
-          @for (task of tasks(); track task.id) {
+        <div class="task">
 
-            <div class="item">
+          <div>
 
-              <strong>{{ task.title }}</strong>
+            {{ task.title }}
 
-              @if (task.status) {
+          </div>
 
-                <span>{{ task.status }}</span>
+          <div class="status">
 
-              }
+            {{ task.status }}
 
-            </div>
+          </div>
 
-          }
+        </div>
 
-        }
+      }
 
-      </div>
-
-    </aside>
+    </div>
 
   </section>
 

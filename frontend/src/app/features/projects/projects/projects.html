@@ -1,9 +1,82 @@
 <div class="page">
 
-  <h1>Projects</h1>
+  <div class="page-header">
 
-  <p>
-    Manage all of your projects here.
-  </p>
+    <div>
+
+      <h1>Projects</h1>
+
+      <p>
+        Manage all your workspace projects.
+      </p>
+
+    </div>
+
+  </div>
+
+  <div class="create-card">
+
+    <h2>Create Project</h2>
+
+    <input
+      type="text"
+      placeholder="Project name"
+      [(ngModel)]="projectName">
+
+    <textarea
+      rows="4"
+      placeholder="Project description"
+      [(ngModel)]="projectDescription">
+    </textarea>
+
+    <button>
+      Create Project
+    </button>
+
+  </div>
+
+  <div class="projects-card">
+
+    <h2>Projects</h2>
+
+    @if (projects().length === 0) {
+
+      <p class="empty">
+        No projects found.
+      </p>
+
+    }
+
+    @for (project of projects(); track project.id) {
+
+      <div class="project">
+
+        <div>
+
+          <div class="name">
+
+            {{ project.name }}
+
+          </div>
+
+          <div class="description">
+
+            {{ project.description || 'No description' }}
+
+          </div>
+
+        </div>
+
+        <div class="badge">
+
+          Active
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
 
 </div>

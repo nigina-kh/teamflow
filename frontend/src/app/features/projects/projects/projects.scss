@@ -1,25 +1,193 @@
-.page {
+:host{
 
-  padding-top: 60px;
+  display:block;
 
-}
-
-h1 {
-
-  margin: 0;
-
-  color: white;
-
-  font-size: 38px;
+  width:100%;
 
 }
 
-p {
+.page{
 
-  margin-top: 12px;
+  display:flex;
 
-  color: var(--muted);
+  flex-direction:column;
 
-  font-size: 16px;
+  gap:28px;
+
+  padding-top:50px;
+
+}
+
+.page-header h1{
+
+  margin:0;
+
+  font-size:42px;
+
+  color:white;
+
+}
+
+.page-header p{
+
+  margin-top:10px;
+
+  color:var(--muted);
+
+}
+
+.create-card,
+.projects-card{
+
+  background:var(--surface);
+
+  border:1px solid rgba(255,255,255,.05);
+
+  border-radius:20px;
+
+  padding:28px;
+
+}
+
+.create-card{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:18px;
+
+}
+
+.create-card h2,
+.projects-card h2{
+
+  margin:0;
+
+  color:white;
+
+}
+
+input,
+textarea{
+
+  width:100%;
+
+  background:#151515;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  color:white;
+
+  padding:14px 16px;
+
+  border-radius:14px;
+
+  outline:none;
+
+  font-size:15px;
+
+}
+
+textarea{
+
+  resize:vertical;
+
+  min-height:120px;
+
+}
+
+input:focus,
+textarea:focus{
+
+  border-color:#2563EB;
+
+}
+
+button{
+
+  align-self:flex-start;
+
+  background:#2563EB;
+
+  color:white;
+
+  border:none;
+
+  padding:14px 28px;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  transition:.2s;
+
+}
+
+button:hover{
+
+  background:#1d4ed8;
+
+}
+
+.project{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:18px 0;
+
+  border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.project:last-child{
+
+  border-bottom:none;
+
+}
+
+.name{
+
+  color:white;
+
+  font-size:17px;
+
+  font-weight:600;
+
+}
+
+.description{
+
+  margin-top:6px;
+
+  color:var(--muted);
+
+  font-size:14px;
+
+}
+
+.badge{
+
+  padding:6px 14px;
+
+  border-radius:999px;
+
+  background:rgba(34,197,94,.15);
+
+  color:#22C55E;
+
+  font-size:13px;
+
+}
+
+.empty{
+
+  color:var(--muted);
 
 }

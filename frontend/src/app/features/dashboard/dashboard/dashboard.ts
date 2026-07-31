@@ -15,7 +15,8 @@ import { DashboardService } from '../../../core/services/dashboard.service';
 })
 export class Dashboard implements OnInit {
 
-  private readonly dashboardService = inject(DashboardService);
+  private readonly dashboardService =
+    inject(DashboardService);
 
   stats = signal<any[]>([]);
 
@@ -62,9 +63,7 @@ export class Dashboard implements OnInit {
 
       },
 
-      error: (err) => {
-        console.error('Failed to load dashboard:', err);
-      },
+      error: console.error,
 
     });
 
